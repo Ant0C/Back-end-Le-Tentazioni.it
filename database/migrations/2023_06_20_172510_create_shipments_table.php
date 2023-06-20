@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
+            $table->string('address', 100);
+            $table->string('city', 50);
+            $table->string('region', 50);
+            $table->string('country', 50);
+            $table->string('zip_code', 8);
+            $table->date('shipment_date');
             $table->timestamps();
         });
     }
