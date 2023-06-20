@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('carts', function (Blueprint $table) {
-            //
+            $table->unsignedBigInteger('product_id')->nullable()->after('id');
+
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
@@ -26,7 +28,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('carts', function (Blueprint $table) {
-            //
+            $table->dropForeign(['product_id']);
+
+            $table->dropColumn('product_id');
         });
     }
 };

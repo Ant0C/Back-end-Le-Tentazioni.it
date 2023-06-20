@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            //
+            $table->unsignedBigInteger('payment_id')->nullable()->after('id');
+
+            $table->foreign('payment_id')->references('id')->on('payments');
         });
     }
 
@@ -26,7 +28,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            //
+            $table->dropForeign(['payment_id']);
+
+            $table->dropColumn('payment_id');
         });
     }
 };
