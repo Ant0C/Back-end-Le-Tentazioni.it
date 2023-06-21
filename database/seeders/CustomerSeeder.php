@@ -30,7 +30,7 @@ class CustomerSeeder extends Seeder
         ];
 
         foreach ($customers as $customer) {
-            $newcustomer = new Customers();
+            $newcustomer = new Customer();
             $newcustomer->first_name = $customer['first_name'];
             $newcustomer->last_name = $customer['last_name'];
             $newcustomer->address = $customer['address'];

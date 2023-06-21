@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,19 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('products', ProductController::class);
+    //Route::resource('products', ProductController::class);
 });
+
+Route::middleware('auth')->group(function () {
+
+    Route::group(['middleware' => 'admin'], function () {
+        
+        Route::get('/dashboard', [HomeController::class, 'adminDash']) -> name('dashboard')->middleware('admin');
+
+        Route::resource('products', ProductController::class);
+    });
+});
+
+Route::get('/home', [HomeController::class, 'index']) -> name('home');
 
 require __DIR__.'/auth.php';

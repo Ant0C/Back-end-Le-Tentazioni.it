@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
-use App\Models\Customers;
+use App\Models\Customer;
 
 class RegisteredUserController extends Controller
 {
@@ -51,7 +51,7 @@ class RegisteredUserController extends Controller
             'user_id' => $user->id,
         ];
 
-        $customers = Customers::create($data);
+        $customers = Customer::create($data);
         
         event(new Registered($user));
 

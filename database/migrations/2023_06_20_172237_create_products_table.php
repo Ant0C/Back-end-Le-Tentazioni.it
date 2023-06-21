@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('visible')->default(true);
             $table->string('size', 10);
             $table->string('color', 15);
+            $table->string('slug', 100);
             $table->timestamps();
         });
     }
