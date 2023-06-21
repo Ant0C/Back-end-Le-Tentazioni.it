@@ -24,7 +24,7 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|unique:products,name',
+            'name'=>['required', 'string'],
             'description'=>'nullable|string',
             'price'=>['required', 'regex:/^\d{1,4}(\.\d{1,2})?$/'],
             'visible'=>'nullable|boolean',

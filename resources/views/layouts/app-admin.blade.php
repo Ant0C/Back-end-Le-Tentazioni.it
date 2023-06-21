@@ -49,13 +49,17 @@
                     <ul class="navbar-nav me-auto">
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
+                                <a class="nav-link" href="{{ url('/products') }}">{{ __('lista prodotti') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/') }}">{{ __('I tuoi ordini') }}</a>
+                                <a class="nav-link" href="{{ url('/products/create') }}">{{ __('crea nuovo prodotto') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('') }}">{{ __('Ordini ricevuti') }}</a>
                             </li>
                         @endauth
                     </ul>
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
