@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -15,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products=Product::All();
+        $products = Product::All();
         return view('products.index',compact('products'));
     }
 
@@ -26,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view ('products.create');
     }
 
     /**
@@ -37,7 +38,11 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['name']);
+        $product = Product::create($data);
+
+        return to_route('products.show',$product);
     }
 
     /**
@@ -59,7 +64,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -71,7 +76,15 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $data = $request->validated();
+
+        if( $data['name'] !== $product->name){
+            $data['slug'] = Str::slug($data['name']);
+        }
+
+        $product->update($data);
+
+        return to_route('products.show', $product);
     }
 
     /**
