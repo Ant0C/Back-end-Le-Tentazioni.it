@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -14,10 +15,19 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::All();
-        return view('products.index',compact('products'));
+        $trashed = $request->input('trashed');
+
+        if ($trashed) {
+            $products = Product::onlyTrashed()->get(); 
+        } else {
+            $products = Product::all();
+        }
+
+        $num_of_trashed = Product::onlyTrashed()->count();
+
+        return view('products.index', compact('products', 'num_of_trashed'));
     }
 
     /**
@@ -87,6 +97,18 @@ class ProductController extends Controller
         return to_route('products.show', $product);
     }
 
+    public function restore(Request $request, Product $product)
+    {
+
+        if ($product->trashed()) {
+            $product->restore();
+
+            $request->session()->flash('message', 'Il prodotto è stato ripristinato.');
+        }
+
+        return back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -95,6 +117,12 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        if($product->trashed()){
+            $product->forceDelete();;
+        }else{
+            $product->delete();
+        }
+
+        return back();
     }
 }

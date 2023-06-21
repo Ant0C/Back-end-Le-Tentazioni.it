@@ -38,7 +38,9 @@ Route::middleware('auth')->group(function () {
         
         Route::get('/dashboard', [HomeController::class, 'adminDash']) -> name('dashboard')->middleware('admin');
 
-        Route::resource('products', ProductController::class);
+        Route::post('/products/{product:slug}/restore', [ProductController::class, 'restore'])->name('products.restore')->withTrashed();
+
+        Route::resource('products', ProductController::class)->withTrashed(['show','edit','update','destroy']);
     });
 });
 

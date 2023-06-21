@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('size', 10);
             $table->string('color', 15);
             $table->string('slug', 100);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
