@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('first_name', 50);
             $table->string('last_name', 50);
             $table->string('address')->nullable();
-            $table->string('phone_number', 12);
+            $table->string('phone_number', 12)->nullable();
             $table->timestamps();
         });
     }
