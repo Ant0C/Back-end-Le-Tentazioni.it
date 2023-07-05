@@ -17,6 +17,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('index', $product);
         $trashed = $request->input('trashed');
 
         if ($trashed) {
@@ -48,6 +49,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+        $this->authorize('store', $product);
         $data = $request->validated();
         $data['slug'] = Str::slug($data['name']);
         $product = Product::create($data);
@@ -86,6 +88,8 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
+        $this->authorize('update', $product);
+
         $data = $request->validated();
 
         if( $data['name'] !== $product->name){
@@ -117,6 +121,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $this->authorize('delete', $product);
         if($product->trashed()){
             $product->forceDelete();;
         }else{
