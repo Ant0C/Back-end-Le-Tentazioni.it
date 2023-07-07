@@ -41,8 +41,11 @@
             </div>
             <div class="mb-3">
                 <label for="visible" class="form-label">Disponibilità</label>
-                <input type="text" name="visible" class="form-control @error('visible') is-invalid @enderror"
-                    value="{{ old('visible', $product->visible) }}" id="visible" aria-describedby="visibleHelp">
+                <select name="visible" class="form-control @error('visible') is-invalid @enderror" id="visible"
+                    aria-describedby="visibleHelp">
+                    <option value="0" @if (old('visible', $product->visible) == 0) selected @endif>Non Disponibile</option>
+                    <option value="1" @if (old('visible', $product->visible) == 1) selected @endif>Disponibile</option>
+                </select>
                 @error('visible')
                     <div class="invalid-feedback">
                         {{ $message }}

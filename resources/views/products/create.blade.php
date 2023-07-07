@@ -38,16 +38,6 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="visible" class="form-label">Disponibilità</label>
-                <input type="text" name="visible" class="form-control @error('visible') is-invalid @enderror"
-                    value="{{ old('visible') }}" id="visible" aria-describedby="visibleHelp">
-                @error('visible')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="mb-3">
                 <label for="size" class="form-label">Misura</label>
                 <input type="text" name="size" class="form-control @error('size') is-invalid @enderror"
                     value="{{ old('size') }}" id="size" aria-describedby="sizeHelp">
