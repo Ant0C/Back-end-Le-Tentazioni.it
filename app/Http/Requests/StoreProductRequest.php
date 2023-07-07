@@ -30,6 +30,7 @@ class StoreProductRequest extends FormRequest
             'visible'=>'nullable|boolean',
             'size'=>'nullable|string',
             'color'=>'nullable|string',
+            'thumbnail' => 'nullable|max:2000',
         ];
     }
 }

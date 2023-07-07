@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -53,6 +54,12 @@ class ProductController extends Controller
         $data = $request->validated();
         $data['visible'] = 1;
         $data['slug'] = Str::slug($data['name']);
+
+        if ($request->hasFile('thumbnail')) {
+            $cover_path = Storage::put('uploads', $data['thumbnail']);
+            $data['cover_image'] = $cover_path;
+        }
+
         $product = Product::create($data);
 
         return to_route('products.show',$product);
@@ -96,6 +103,15 @@ class ProductController extends Controller
 
         if( $data['name'] !== $product->name){
             $data['slug'] = Str::slug($data['name']);
+        }
+
+        if ($request->hasFile('thumbnail')) {
+            $cover_path = Storage::put('uploads', $data['thumbnail']);
+            $data['cover_image'] = $cover_path;
+
+            if ($product->cover_image && Storage::exists($product->cover_image)) {
+                Storage::delete($product->cover_image);
+            }
         }
 
         $product->update($data);

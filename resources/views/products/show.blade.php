@@ -17,6 +17,11 @@
         <div class="d-flex align-items-center">
             <div class="me-auto">
                 <h1>{{ $product->name }}</h1>
+                @if ($product->cover_image)
+                    <div class="container">
+                        <img src="{{ $product->cover_path }}" alt="">
+                    </div>
+                @endif
             </div>
 
             <div class="d-flex">

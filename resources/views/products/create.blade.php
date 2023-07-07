@@ -5,7 +5,7 @@
         <h1>Nuovo prodotto</h1>
     </div>
     <div class="container">
-        <form action="{{ route('products.store') }}" method="POST">
+        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Nome prodotto</label>
@@ -52,6 +52,16 @@
                 <input type="text" name="color" class="form-control @error('color') is-invalid @enderror"
                     value="{{ old('color') }}" id="color" aria-describedby="colorHelp">
                 @error('color')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="thumbnail" class="form-label">IMG</label>
+                <input type="file" name="thumbnail" class="form-control  @error('thumbnail') is-invalid @enderror"
+                    id="thumbnail" aria-describedby="thumbnailHelp" value="{{ old('thumbnail') }}">
+                @error('thumbnail')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
