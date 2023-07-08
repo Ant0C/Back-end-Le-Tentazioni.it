@@ -60,6 +60,11 @@ class ProductController extends Controller
             $data['cover_image'] = $cover_path;
         }
 
+        if ($request->hasFile('thumbnail_s')) {
+            $cover_path_s = Storage::put('uploads', $data['thumbnail_s']);
+            $data['cover_image_s'] = $cover_path_s;
+        }
+
         $product = Product::create($data);
 
         return to_route('products.show',$product);
@@ -111,6 +116,15 @@ class ProductController extends Controller
 
             if ($product->cover_image && Storage::exists($product->cover_image)) {
                 Storage::delete($product->cover_image);
+            }
+        }
+
+        if ($request->hasFile('thumbnail_s')) {
+            $cover_path_s = Storage::put('uploads', $data['thumbnail_s']);
+            $data['cover_image_s'] = $cover_path_s;
+
+            if ($product->cover_image_s && Storage::exists($product->cover_image_s)) {
+                Storage::delete($product->cover_image_s);
             }
         }
 

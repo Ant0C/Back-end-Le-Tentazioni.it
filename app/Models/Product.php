@@ -21,7 +21,10 @@ class Product extends Model
         'color',
         'slug',
         'cover_image',
-        'thumbnail'
+        'cover_image_s',
+        'thumbnail',
+        'thumbnail_s'
+
     ];
 
     public function user()
@@ -33,9 +36,10 @@ class Product extends Model
     {
         return Attribute::make(
             get: function ($value, $attributes) {
-                return asset('storage/' . $attributes['cover_image']);
+                return asset('storage/' . $attributes['cover_image'],$attributes['cover_image_s']);
             }
         );
     }
-    protected $appends = ['cover_path'];
+
+    protected $appends = ['cover_path','cover_path_s'];
 }

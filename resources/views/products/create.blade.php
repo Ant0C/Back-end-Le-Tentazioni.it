@@ -58,7 +58,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="thumbnail" class="form-label">IMG</label>
+                <label for="thumbnail" class="form-label">IMG 1</label>
                 <input type="file" name="thumbnail" class="form-control  @error('thumbnail') is-invalid @enderror"
                     id="thumbnail" aria-describedby="thumbnailHelp" value="{{ old('thumbnail') }}">
                 @error('thumbnail')
@@ -67,6 +67,17 @@
                     </div>
                 @enderror
             </div>
+            <div class="mb-3">
+                <label for="thumbnail_s" class="form-label">IMG 2</label>
+                <input type="file" name="thumbnail_s" class="form-control  @error('thumbnail_s') is-invalid @enderror"
+                    id="thumbnail_s" aria-describedby="thumbnail_sHelp" value="{{ old('thumbnail_s') }}">
+                @error('thumbnail_s')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
             <button type="submit" class="btn btn-primary">CREA</button>
         </form>
     </div>

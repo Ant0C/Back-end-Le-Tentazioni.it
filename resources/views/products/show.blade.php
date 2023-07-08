@@ -16,29 +16,59 @@
     <div class="container">
         <div class="d-flex align-items-center">
             <div class="me-auto">
-                <h1>{{ $product->name }}</h1>
-                @if ($product->cover_image)
-                    <div class="container">
-                        <img src="{{ $product->cover_path }}" alt="">
+                <div class="container">
+                    <div class="container_product">
+                        <img src="{{ asset('storage/' . $product->cover_image) }}" alt="" class="img">
+                        <img src="{{ asset('storage/' . $product->cover_image_s) }}" alt="" class="overlay">
+                        <div class="text">
+                            <p>{{ $product->name }}</p>
+                            <span class="price">{{ $product->price }} €</span>
+                            <p>{{ $product->description }}</p>
+                        </div>
                     </div>
-                @endif
+                </div>
             </div>
-
-            <div class="d-flex">
-                <a class="btn btn-sm btn-secondary" href="{{ route('products.edit', $product) }}">Modifica</a>
-                @if ($product->trashed())
-                    <form action="{{ route('products.restore', $product) }}" method="product">
-                        @csrf
-                        <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
-                    </form>
-                @endif
-            </div>
-
         </div>
-    </div>
-    <div class="container">
-        <p>
-            {{ $product->description }}
-        </p>
+
+        <div class="d-flex">
+            <a class="btn btn-sm btn-secondary" href="{{ route('products.edit', $product) }}">Modifica</a>
+            @if ($product->trashed())
+                <form action="{{ route('products.restore', $product) }}" method="product">
+                    @csrf
+                    <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
+                </form>
+            @endif
+        </div>
+
     </div>
 @endsection
+
+<style>
+    img {
+        width: 300px;
+    }
+
+    .text {
+        font-family: 'Roboto', sans-serif;
+        font-size: 12px;
+    }
+
+    .container_product {
+        flex-basis: calc(100%/4);
+        position: relative;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        transition: .3s ease;
+    }
+
+    .container_product:hover .overlay {
+        opacity: 1;
+    }
+</style>

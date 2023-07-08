@@ -16,6 +16,10 @@ return new class extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->string('cover_image')->nullable();
         });
+        Schema::table('products', function (Blueprint $table) {
+            $table->string('cover_image_s')->nullable();
+        });
+
     }
 
     /**
@@ -28,5 +32,9 @@ return new class extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->dropColumn('cover_image');
         });
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('cover_image_s');
+        });
+
     }
 };
