@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileControllerAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
 
     Route::group(['middleware' => 'admin'], function () {
-        
+        Route::get('/profile-admin', [ProfileControllerAdmin::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile-admin', [ProfileControllerAdmin::class, 'update'])->name('profile.update');
+        Route::delete('/profile-admin', [ProfileControllerAdmin::class, 'destroy'])->name('profile.destroy');
+    
         Route::get('/dashboard', [HomeController::class, 'adminDash']) -> name('dashboard')->middleware('admin');
 
         Route::post('/products/{product:slug}/restore', [ProductController::class, 'restore'])->name('products.restore')->withTrashed();
