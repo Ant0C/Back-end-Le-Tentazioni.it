@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('size', 10);
             $table->string('color', 15);
             $table->string('slug', 100);
+            $table->string('thumbnail')->nullable();
+            $table->string('thumbnail_s')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
