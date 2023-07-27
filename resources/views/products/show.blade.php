@@ -25,6 +25,13 @@
                             <span class="price">{{ $product->price }} €</span>
                             <p>{{ $product->description }}</p>
                         </div>
+                        <div>
+                            @forelse($product->categories as $category)
+                                <span class="badge rounded-pill text-bg-warning">{{ $category->name }}</span>
+                            @empty
+                                -
+                            @endforelse
+                        </div>
                     </div>
                 </div>
             </div>

@@ -51,6 +51,7 @@
                     <th>Nome</th>
                     <th>Slug</th>
                     <th>Data creazione</th>
+                    <th>Categoria prodotto</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +63,13 @@
                         </td>
                         <td>{{ $product->slug }}</td>
                         <td>{{ $product->created_at->format('d/m/Y') }}</td>
+                        <td>
+                            @forelse($product->categories as $category)
+                                <span class="badge rounded-pill text-bg-primary">{{ $category->name }}</span>
+                            @empty
+                                -
+                            @endforelse
+                        </td>
                         <td>
                             <div class="d-flex ">
                                 <a class="btn btn-sm btn-secondary" href="{{ route('products.edit', $product) }}">Edit</a>
