@@ -73,6 +73,25 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label for="categories" class="form-label">tecnologia utilizzata</label>
+                <div class="@error('categories') is-invalid @enderror">
+                    @foreach ($categories as $cat)
+                        <div class=form-check>
+                            <input name="categories[]" @checked(in_array($cat->id, old('categories', $product->categories->pluck('id')->all()))) class="form-check-input" type="checkbox"
+                                value="{{ $cat->id }}" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                {{ $cat->name }}
+                            </label>
+                        </div>
+                    @endforeach()
+                </div>
+                @error('categories')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="thumbnail" class="form-label">IMG 1</label>
                 <input type="file" name="thumbnail" class="form-control  @error('thumbnail') is-invalid @enderror"
                     id="thumbnail" aria-describedby="thumbnailHelp" value="{{ old('thumbnail') }}">

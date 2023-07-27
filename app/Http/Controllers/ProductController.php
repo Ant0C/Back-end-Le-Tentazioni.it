@@ -8,6 +8,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -39,7 +40,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view ('products.create');
+        $categories = Category::all();
+        return view ('products.create', compact('categories'));
     }
 
     /**
@@ -67,6 +69,11 @@ class ProductController extends Controller
 
         $product = Product::create($data);
 
+        if(isset($data['categories'])){
+            $product->categories()->attach($data['categories']);
+        }
+
+
         return to_route('products.show',$product);
     }
 
@@ -90,7 +97,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+        $categories = Category::all();
+        return view('products.edit', compact('product','categories'));
     }
 
     /**
@@ -128,6 +136,12 @@ class ProductController extends Controller
             }
         }
 
+        if(isset($data['categories'])){
+            $product->categories()->sync($data['categories']);
+            } else {
+                $product->categories()->detach();
+            }
+
         $product->update($data);
 
         return to_route('products.show', $product);
@@ -155,7 +169,8 @@ class ProductController extends Controller
     {
         //$this->authorize('delete', $product);
         if($product->trashed()){
-            $product->forceDelete();;
+            $product->categories()->detach();
+            $product->forceDelete();
         }else{
             $product->delete();
         }
