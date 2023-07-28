@@ -54,6 +54,12 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('') }}">{{ __('Ordini ricevuti') }}</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/categories') }}">{{ __('Tutte le categorie') }}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/categories/create') }}">{{ __('Crea categoria') }}</a>
+                            </li>
                         @endauth
                     </ul>
 
