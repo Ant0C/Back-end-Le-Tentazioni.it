@@ -29,17 +29,17 @@
             @if (request('trashed'))
                 <h1 class="me-auto">Cestino</h1>
             @else
-                <h1 class="me-auto">Tutti i Prodotti</h1>
+                <h1 class="me-auto">Tutte le categorie</h1>
             @endif
             <div>
                 @if (request('trashed'))
-                    <a class="btn btn-sm btn-light" href="{{ route('products.index') }}">Tutti i prodotti</a>
+                    <a class="btn btn-sm btn-light" href="{{ route('products.index') }}">Tutte le categorie</a>
                 @else
                     <a class="btn btn-sm btn-light" href="{{ route('products.index', ['trashed' => true]) }}">
                         Cestino({{ $num_of_trashed }})
                     </a>
                 @endif
-                <a class="btn btn-sm btn-primary" href="{{ route('products.create') }}">Nuovo post</a>
+                <a class="btn btn-sm btn-primary" href="{{ route('products.create') }}">Nuova categoria</a>
             </div>
         </div>
     </div>
@@ -49,37 +49,26 @@
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
-                    <th>Slug</th>
-                    <th>Data creazione</th>
-                    <th>Categoria prodotto</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($products as $product)
+                @forelse ($categories as $category)
                     <tr>
-                        <td>{{ $product->id }}</td>
+                        <td>{{ $category->id }}</td>
                         <td>
-                            <a href="{{ route('products.show', $product) }}">{{ $product->name }}</a>
-                        </td>
-                        <td>{{ $product->slug }}</td>
-                        <td>{{ $product->created_at->format('d/m/Y') }}</td>
-                        <td>
-                            @forelse($product->categories as $category)
-                                <span class="badge rounded-pill text-bg-primary">{{ $category->name }}</span>
-                            @empty
-                                -
-                            @endforelse
+                            <a href="{{ route('categories.show', $category) }}">{{ $category->name }}</a>
                         </td>
                         <td>
                             <div class="d-flex ">
-                                <a class="btn btn-sm btn-secondary" href="{{ route('products.edit', $product) }}">Edit</a>
-                                <form action="{{ route('products.destroy', $product) }}" method="POST">
+                                <a class="btn btn-sm btn-secondary"
+                                    href="{{ route('categories.edit', $category) }}">Edit</a>
+                                <form action="{{ route('categories.destroy', $category) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <input class="btn btn-sm btn-danger" type="submit" value="Elimina">
                                 </form>
-                                @if ($product->trashed())
-                                    <form action="{{ route('products.restore', $product) }}" method="POST">
+                                @if ($category->trashed())
+                                    <form action="{{ route('categories.restore', $category) }}" method="POST">
                                         @csrf
                                         <input class="btn btn-sm btn-success" type="submit" value="Ripristina">
                                     </form>
@@ -89,7 +78,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <th colspan="6">Nessun prodotto trovato</th>
+                        <th colspan="6">Nessuna categoria trovata</th>
                     </tr>
                 @endforelse
             </tbody>

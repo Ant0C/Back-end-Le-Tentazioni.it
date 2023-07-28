@@ -32,6 +32,7 @@ class UpdateProductRequest extends FormRequest
             'color'=>'nullable|string',
             'thumbnail' => 'nullable|max:2000',
             'thumbnail_s' => 'nullable|max:2000',
+            'categories' => 'exists:categories,id',
 
         ];
     }

@@ -23,13 +23,14 @@ class Product extends Model
         'cover_image',
         'cover_image_s',
         'thumbnail',
-        'thumbnail_s'
+        'thumbnail_s',
+        'category_id',
 
     ];
 
-    public function user()
+    public function categories()
     {
-    return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'products_categories');
     }
 
     protected function coverPath(): Attribute
