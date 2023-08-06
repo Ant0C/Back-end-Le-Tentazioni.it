@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -13,9 +14,19 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, Order $order)
     {
-        //
+        $trashed = $request->input('trashed');
+
+        if ($trashed) {
+            $orders = Order::onlyTrashed()->get(); 
+        } else {
+            $orders = Order::all();
+        }
+
+        $num_of_trashed = Order::onlyTrashed()->count();
+
+        return view('orders.index', compact('orders', 'num_of_trashed'));
     }
 
     /**
@@ -47,7 +58,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('orders.show',compact('order'));
     }
 
     /**
@@ -81,6 +92,12 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        if($order->trashed()){
+            $order->forceDelete();
+        }else{
+            $order->delete();
+        }
+
+        return back();
     }
 }
