@@ -52,7 +52,7 @@
                                 <a class="nav-link" href="{{ url('/products/create') }}">{{ __('crea nuovo prodotto') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('') }}">{{ __('Ordini ricevuti') }}</a>
+                                <a class="nav-link" href="{{ url('/orders') }}">{{ __('Ordini ricevuti') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/categories') }}">{{ __('Tutte le categorie') }}</a>

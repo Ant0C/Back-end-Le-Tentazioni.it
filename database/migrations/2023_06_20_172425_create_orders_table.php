@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->date('order_date');
             $table->decimal('total_price', 10,2);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

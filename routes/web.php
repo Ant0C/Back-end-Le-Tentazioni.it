@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileControllerAdmin;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('products', ProductController::class)->withTrashed(['show','edit','update','destroy']);
 
         Route::resource('categories', CategoryController::class)->withTrashed(['show','edit','update','destroy']);
+
+        Route::resource('orders', OrderController::class)->withTrashed(['show','edit','update','destroy']);
 
     });
 });
