@@ -33,14 +33,25 @@ class Product extends Model
         return $this->belongsToMany(Category::class, 'products_categories');
     }
 
-    protected function coverPath(): Attribute
+    public function getCoverPathAttribute()
     {
-        return Attribute::make(
-            get: function ($value, $attributes) {
-                return asset('storage/' . $attributes['cover_image'],$attributes['cover_image_s']);
-            }
-        );
+        return asset('storage/' . $this->attributes['cover_image']);
     }
+
+    public function getCoverPathSAttribute()
+    {
+        return asset('storage/' . $this->attributes['cover_image_s']);
+    }
+    
+    // This type of way go in conflict with API
+    // protected function coverPath(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: function ($value, $attributes) {
+    //             return asset('storage/' . attributes['cover_image'],$attributes['cover_image_s']);
+    //         }
+    //     );
+    // }
 
     protected $appends = ['cover_path','cover_path_s'];
 }
