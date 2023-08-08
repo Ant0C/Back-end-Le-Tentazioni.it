@@ -19,12 +19,12 @@
     @vite(['resources/js/app.js'])
 </head>
 
-<body>
-    <div id="app">
+<body class="d-flex flex-column vh-100">
+    <div id="app" class="flex-grow-1 d-flex">
 
 
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm flex-shrink-0 col-2 flex-column">
+            <div class="container d-flex flex-column gap-3 flex-grow-1">
                 <div class="logo_laravel">
                     <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 150px">
                         <g clip-path="url(#clip0)" fill="#EF3B2D">
@@ -35,34 +35,38 @@
                 </div>
                 {{-- config('app.name', 'Laravel') --}}
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button> --}}
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                    <dl class="navbar-nav me-auto flex-column gap-5">
                         @auth
-                            <li class="nav-item">
+                            <dt class="text-decoration-underline">PRODOTTI</dt>
+                            <dd class="nav-item hover">
                                 <a class="nav-link" href="{{ url('/products') }}">{{ __('lista prodotti') }}</a>
-                            </li>
-                            <li class="nav-item">
+                            </dd>
+                            <dd class="nav-item hover">
                                 <a class="nav-link" href="{{ url('/products/create') }}">{{ __('crea nuovo prodotto') }}</a>
-                            </li>
-                            <li class="nav-item">
+                            </dd>
+                            <dt class="text-decoration-underline">ORDINI</dt>
+                            <dd class="nav-item hover">
                                 <a class="nav-link" href="{{ url('/orders') }}">{{ __('Ordini ricevuti') }}</a>
-                            </li>
-                            <li class="nav-item">
+                            </dd>
+                            <dt class="text-decoration-underline">CATEGORIE</dt>
+                            <dd class="nav-item hover">
                                 <a class="nav-link" href="{{ url('/categories') }}">{{ __('Tutte le categorie') }}</a>
-                            </li>
-                            <li class="nav-item">
+                            </dd>
+                            <dd class="nav-item hover">
                                 <a class="nav-link" href="{{ url('/categories/create') }}">{{ __('Crea categoria') }}</a>
-                            </li>
+                            </dd>
                         @endauth
-                    </ul>
-
+                    </dl>
+                </div>
+                <div class="">
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -96,10 +100,16 @@
             </div>
         </nav>
 
-        <main class="">
+        <main class="col-10">
             @yield('content')
         </main>
     </div>
 </body>
 
 </html>
+
+<style>
+    .hover:hover {
+        background-color: gainsboro !important;
+    }
+</style>
