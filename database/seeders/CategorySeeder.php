@@ -16,7 +16,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $categories = ['Elegante','Estivo','Sportivo','Casual'];
+        $categories = ['Borse','Abiti','Camicie','Pantaloni','Magliette'];
 
         foreach($categories as $category_name){
             $category = new Category();
