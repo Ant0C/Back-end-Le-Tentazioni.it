@@ -39,7 +39,7 @@
                         Cestino({{ $num_of_trashed }})
                     </a>
                 @endif
-                <a class="btn btn-sm btn-primary" href="{{ route('products.create') }}">Nuovo post</a>
+                <a class="btn btn-sm btn-primary" href="{{ route('products.create') }}">Nuovo prodotto</a>
             </div>
         </div>
     </div>

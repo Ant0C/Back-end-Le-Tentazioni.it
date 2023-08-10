@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('categories', CategoryController::class)->withTrashed(['show','edit','update','destroy']);
 
+        Route::post('/categories/{category:slug}/restore', [CategoryController::class, 'restore'])->name('categories.restore')->withTrashed();
+
         Route::resource('orders', OrderController::class)->withTrashed(['show','edit','update','destroy']);
 
     });

@@ -93,6 +93,18 @@ class CategoryController extends Controller
         return to_route('categories.index', $category);
     }
 
+    public function restore(Request $request, Category $category)
+    {
+
+        if ($category->trashed()) {
+            $category->restore();
+
+            $request->session()->flash('message', 'Il prodotto è stato ripristinato.');
+        }
+
+        return back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *

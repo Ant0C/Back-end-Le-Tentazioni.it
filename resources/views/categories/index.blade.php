@@ -33,13 +33,13 @@
             @endif
             <div>
                 @if (request('trashed'))
-                    <a class="btn btn-sm btn-light" href="{{ route('products.index') }}">Tutte le categorie</a>
+                    <a class="btn btn-sm btn-light" href="{{ route('categories.index') }}">Tutte le categorie</a>
                 @else
-                    <a class="btn btn-sm btn-light" href="{{ route('products.index', ['trashed' => true]) }}">
+                    <a class="btn btn-sm btn-light" href="{{ route('categories.index', ['trashed' => true]) }}">
                         Cestino({{ $num_of_trashed }})
                     </a>
                 @endif
-                <a class="btn btn-sm btn-primary" href="{{ route('products.create') }}">Nuova categoria</a>
+                <a class="btn btn-sm btn-primary" href="{{ route('categories.create') }}">Nuova categoria</a>
             </div>
         </div>
     </div>

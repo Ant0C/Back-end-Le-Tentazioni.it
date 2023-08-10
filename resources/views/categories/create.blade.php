@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container py-5">
-        <h1>Nuovo prodotto</h1>
+        <h1>Nuova categoria</h1>
     </div>
     <div class="container">
         <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
